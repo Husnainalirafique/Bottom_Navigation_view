@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BottomNavigationView</string>
+    <string name="ProfileFragment">Profile Fragment</string>
+    <string name="NotificationFragment">Notification Fragment</string>
+    <string name="ExploreFragment">Explore Fragment</string>
+    <string name="SettingFragment">Setting Fragment</string>
+</resources>
