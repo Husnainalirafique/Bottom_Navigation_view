@@ -19,7 +19,17 @@
         android:id="@+id/exploreFragment"
         android:name="com.example.bottomnavigationbar.fragments.ExploreFragment"
         tools:layout="@layout/fragment_explore"
-        android:label="ExploreFragment" />
+        android:label="ExploreFragment" >
+        <action
+            android:id="@+id/action_exploreFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_exploreFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_exploreFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.bottomnavigationbar.fragments.SettingsFragment"

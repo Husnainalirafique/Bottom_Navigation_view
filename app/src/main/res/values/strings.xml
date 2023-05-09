@@ -4,4 +4,6 @@
     <string name="NotificationFragment">Notification Fragment</string>
     <string name="ExploreFragment">Explore Fragment</string>
     <string name="SettingFragment">Setting Fragment</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>
