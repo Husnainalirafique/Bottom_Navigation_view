@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@id/settingsFragment"
+        android:icon="@drawable/setting"
+        android:title="Settings" />
+    <item
+        android:id="@id/termsAndPrivacy"
+        android:icon="@drawable/explore"
+        android:title="Terms and privacy"/>
+</menu>

@@ -3,77 +3,46 @@ package com.example.bottomnavigationbar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.onNavDestinationSelected
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.bottomnavigationbar.databinding.ActivityHomeBinding
-import com.example.bottomnavigationbar.fragments.ProfileFragment
+
 
 class Home : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
-    private lateinit var toogle: ActionBarDrawerToggle
+    private lateinit var navController: NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
-
         //handling Clicks
-        clickListners()
-
-        //handling tool bar
-        actionbar()
-
-        //Drawer Layout
-        drawerLayout()
+        bottomNavigation()
     }
 
-    private fun drawerLayout() {
-        val drawerLayout = binding.drawerLayout
-        val navView = binding.navigationView
+    private fun bottomNavigation() {
+        navController = findNavController(R.id.nav_host_fragment)
 
-        toogle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
-        drawerLayout.addDrawerListener(toogle)
-        toogle.syncState()
+        //setup bottom navigation
+        binding.bottomNavigation.setupWithNavController(navController)
 
-        supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-            title = "Husnain Ali Rafique"
-        }
-
-        val navController = findNavController(R.id.nav_host_fragment_container)
-        navView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-
-            }
-            true
-        }
+        //drawer
+        appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.profileFragment, R.id.notificationFragment,R.id.exploreFragment),
+            binding.drawerLayout
+        )
+        //setup actionbar
+        binding.navView.setupWithNavController(navController)
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            binding.drawerLayout.close()
-        } else {
-            super.getOnBackPressedDispatcher().onBackPressed()
-        }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (toogle.onOptionsItemSelected(item)) {
-            true
-        } else {
-            return super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun clickListners() {
-        binding.bottomNavigation.setupWithNavController(findNavController(R.id.nav_host_fragment_container))
-    }
-
-    private fun actionbar() {
-
+    //handle drawer icon
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp(appBarConfiguration)
     }
 }
